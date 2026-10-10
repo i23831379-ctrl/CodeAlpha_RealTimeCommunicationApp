@@ -7,11 +7,11 @@ const path = require('path');
 
 const app = express();
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 // Explicit root route for SPA entry point
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
 const server = http.createServer(app);
@@ -96,7 +96,7 @@ io.on('connection', socket => {
   });
 });
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4002;
 
 // Start the server on the configured port.
 server.listen(PORT, () => {
@@ -105,7 +105,7 @@ server.listen(PORT, () => {
 
 // SPA fallback: serve index.html for any unknown route (helps client‑side routing)
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
 process.on('SIGINT', () => {
