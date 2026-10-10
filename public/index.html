@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiveChat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container livechat-page">
+    <header class="app-header">
+      <h1>LiveChat</h1>
+      <span id="connectionStatus" class="status-dot"></span>
+    </header>
+    <main class="app-main">
+      <aside class="participants-panel">
+        <h3>Participants</h3>
+        <ul id="participantsList"></ul>
+      </aside>
+      <section class="main-area">
+        <section class="video-panel">
+          <video id="localVideo" autoplay muted playsinline class="video-box"></video>
+          <video id="remoteVideo" autoplay playsinline class="video-box"></video>
+        </section>
+        <section class="whiteboard-panel">
+          <canvas id="whiteboard"></canvas>
+          <div class="wb-tools">
+            <input type="color" id="colorPicker" value="#ff0000" />
+            <input type="range" id="brushSize" min="1" max="10" value="3" />
+            <button id="clearBtn">Clear</button>
+          </div>
+        </section>
+        <section class="chat-section">
+          <div class="chat-window" id="chatWindow"></div>
+          <footer class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" />
+            <button id="sendBtn">Send</button>
+          </footer>
+        </section>
+      </section>
+    </main>
+    <footer class="control-bar">
+      <button id="muteBtn" aria-label="Mute/Unmute Microphone">🎤</button>
+      <button id="cameraBtn" aria-label="Enable/Disable Camera">📹</button>
+      <button id="screenShareBtn" aria-label="Screen Share">🖥️</button>
+      <button id="leaveBtn" aria-label="Leave Room">🚪</button>
+    </footer>
+  </div>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

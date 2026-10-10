@@ -1,0 +1,187 @@
+/* Utility classes */
+.hidden { display: none; }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Join panel design */
+.join-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.join-panel h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
+.join-panel p { margin-bottom: 1rem; opacity: 0.9; }
+.join-panel input { margin: 0.4rem 0; width: 100%; padding: 0.5rem; border: none; border-radius: 6px; }
+.join-panel button { margin-top: 0.6rem; padding: 0.6rem 1.2rem; background: var(--primary); color:#fff; border:none; border-radius:6px; cursor:pointer; }
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #1e1e2f, #2a2a40);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --primary: hsl(210, 80%, 60%);
+  --accent: hsl(340, 80%, 60%);
+  --text-color: #e0e0ff;
+  --header-height: 60px;
+  --font-family: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-header {
+  height: var(--header-height);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.app-header h1 { font-size: 1.4rem; font-weight:600; }
+.cta-button { background: var(--primary); border:none; color:#fff; padding:0.5rem 1rem; border-radius:8px; cursor:pointer; transition:transform .2s; }
+.cta-button:hover { transform:scale(1.05); }
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 300px);
+  gap: 1rem;
+  height: calc(100dvh - var(--header-height) - 60px);
+  padding: 0;
+}
+.video-panel {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+.controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.5rem;
+}
+.controls button {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.whiteboard-panel canvas { width:100%; height:auto; border:1px solid rgba(255,255,255,0.3); border-radius:8px; }
+.wb-tools { margin-top:0.5rem; display:flex; gap:0.5rem; align-items:center; }
+#colorPicker, #brushSize { border:none; }
+#clearBtn { background:var(--primary); color:#fff; border:none; padding:0.3rem 0.6rem; border-radius:6px; cursor:pointer; }
+
+/* LiveChat page scoped layout */
+.livechat-page {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: var(--header-height) minmax(0, 1fr) 60px;
+  overflow: hidden;
+}
+.livechat-page .app-header {
+  grid-row: 1;
+}
+.livechat-page .app-main {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  overflow: hidden;
+}
+.livechat-page .participants-panel {
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+.livechat-page .main-area {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 0;
+}
+.livechat-page .video-panel {
+  position: relative;
+}
+.livechat-page .remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.livechat-page #localVideo {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: clamp(120px, 20%, 240px);
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  z-index: 2;
+}
+.livechat-page .chat-section {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.livechat-page .chat-window {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+.livechat-page .control-bar {
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+}
+.livechat-page .control-bar button {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#leaveBtn {
+  background: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .livechat-page .app-main {
+    grid-template-columns: 1fr;
+  }
+  .livechat-page .participants-panel {
+    display: none;
+  }
+}
+
+@media (max-width:768px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    height: calc(100dvh - var(--header-height) - 60px);
+  }
+}
